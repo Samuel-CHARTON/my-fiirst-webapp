@@ -21,8 +21,11 @@ post '/add' => sub ($c) {
     my $username = $c->param('username');
     my $email = $c->param('email');
 
-    $c->stash(username => $username, email => $email);
-    $c->render(template => 'add');
+    add_user($username, $email);
+
+    # $c->stash(username => $username, email => $email);
+    # $c->render(template => 'add');
+    return $c->redirect_to('/list');
 };
 
 app->start;
@@ -69,8 +72,10 @@ __DATA__
 <% } %>
 </table>
 
-#https://dev.to/akuks/forms-and-fields-in-mojolicous-1ng0 + gpt
 @@ add.html.ep
+<!--
+#https://dev.to/akuks/forms-and-fields-in-mojolicous-1ng0 + gpt
+-->
 <h1>Add an user</h1>
 %= form_for add => (method => 'POST') => begin
     %= label_for username => 'Username:'
@@ -79,7 +84,9 @@ __DATA__
     %= password_field 'email', id => "email"
     %= submit_button 'add'
 % end
+<!--
 <% if (stash('username') && stash('email')) { %>
   <p>Username: <%= stash('username') %></p>
   <p>email: <%= stash('email') %></p>
 <% } %>
+-->
