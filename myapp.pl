@@ -9,16 +9,9 @@ get '/' => sub ($c) {
 };
 
 get '/list' => sub ($c) {
-  $c->stash(tab => generate_tab());
+  $c->stash(tab => get_users());
   $c->render(template => 'list');
 };
-
-sub generate_tab {
-  my $users = get_users();
-  my $test = ["<div id='name'><p>oui</p></div>"];
-  push @$test, "<div id='name'><p>oui</p></div>";
-  return $test;
-}
 
 app->start;
 __DATA__
@@ -36,7 +29,30 @@ __DATA__
 </html>
 
 @@ list.html.ep
-<h1>List of Users<h1>
+<h1>List of Users</h1>
+<table>
+  <tr>
+    <td>
+      id
+    </td>
+    <td>
+      name
+    </td>
+    <td>
+      email
+    </td>
+  </tr>
 <% foreach my $tabs (@$tab) { %>
-  <%== $tabs %>
+  <tr>
+    <td>
+      <%== $tabs->{id} %>
+    </td>
+    <td>
+      <%== $tabs->{name} %>
+    </td>
+    <td>
+      <%== $tabs->{email} %>
+    </td>
+  </tr>
 <% } %>
+</table>
