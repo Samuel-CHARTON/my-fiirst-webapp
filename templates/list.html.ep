@@ -1,3 +1,5 @@
+% layout 'default';
+% title 'list';
 <h1>List of Users</h1>
 <table>
   <tr>

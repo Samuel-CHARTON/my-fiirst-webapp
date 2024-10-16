@@ -2,5 +2,10 @@
 <html>
   <head><title><%= title %></title></head>
     <link rel="stylesheet" href="/styles.css">
-  <body><%= content %></body>
+    <body>
+        <%= include 'nav/navbar' %>
+        <div id="content_wrapper">
+            <%= content %>
+        </div>
+    </body>
 </html>

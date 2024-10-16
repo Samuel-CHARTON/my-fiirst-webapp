@@ -1,0 +1,7 @@
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/list">Users List</a></li>
+    <li><a href="/add">Add User</a></li>
+  </ul>
+</nav>
