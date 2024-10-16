@@ -6,10 +6,10 @@
 <h1>Add an user</h1>
 %= form_for add => (method => 'POST') => begin
     %= label_for username => 'Username:'
-    %= text_field 'username', id => 'username'
+    %= text_field 'username', id => 'username', placeholder => 'Toto', required => 'true'
     %= label_for email => 'email:'
-    %= password_field 'email', id => "email"
-    %= submit_button 'add'
+    %= password_field 'email', id => "email", placeholder => 'toto@toto.fr', required => 'true'
+    %= submit_button 'add', id => 'submit'
 % end
 <!--
 <% if (stash('username') && stash('email')) { %>
