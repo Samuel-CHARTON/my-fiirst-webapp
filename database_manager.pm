@@ -6,13 +6,16 @@ use JSON;
 use Exporter 'import';
 use Carp;
 
+use feature 'signatures';
+no warnings 'experimental::signatures';
+
 our @EXPORT_OK = qw(get_users get_user_by_id get_user_by_email add_user remove_user);
 
 my $users_file = 'fake_db.json';
 
 # TODO: database_manager.pm pourrais aussi beneficier de fonction signature en utlisant par example v5.36
 
-sub get_users {
+sub get_users() {
     open my $fh, '<', $users_file or return [];
     local $/; # Enable 'slurp' mode to read the whole file at once
     my $json_text = <$fh>;
@@ -20,7 +23,7 @@ sub get_users {
     return decode_json($json_text);
 }
 
-sub get_last_id {
+sub get_last_id() {
     my $users = get_users();
     my $max_id = 0;
     foreach my $user (@$users) {
@@ -31,8 +34,7 @@ sub get_last_id {
     return $max_id;
 }
 
-sub get_user_by_id {
-    my $id = shift; # Get the id from the arguments
+sub get_user_by_id($id) {
     my $users = get_users();
     foreach my $user (@$users) {
         if ($user->{id} == $id) {
@@ -42,8 +44,7 @@ sub get_user_by_id {
     return undef;
 }
 
-sub get_user_by_email {
-    my $email = shift;
+sub get_user_by_email($email) {
     my $users = get_users();
     foreach my $user (@$users) {
         if ($user->{email} eq $email) {
@@ -53,10 +54,8 @@ sub get_user_by_email {
     return undef;
 }
 
-sub add_user {
+sub add_user($name, $email) {
     # arg 1: name, arg 2: email
-    my $name = shift;
-    my $email = shift;
     my $users = get_users();
     my $new_id = get_last_id() + 1;
     my $new_user = {
