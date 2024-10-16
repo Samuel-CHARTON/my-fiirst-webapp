@@ -122,9 +122,38 @@ is(
         id => 3,
         email => 'samuel@oui.fr'
     },
-    "samuel est pas dans la base" 
+    "samuel est dans la base" 
 );
 
-# test n°9 remove_user
+# test n°9-10-11 remove_user
+
+# test n°9 test if samuel is not in the base
+is(
+    get_user_by_email('samuel@oui.fr'), 
+    {
+        name => 'samuel',
+        id => 3,
+        email => 'samuel@oui.fr'
+    },
+    "samuel est dans la base" 
+);
+
+# test n°10 test if add_user returns 1
+my $user_id = get_user_by_email('samuel@oui.fr')->{id};
+ok(
+    remove_user($user_id),
+    "is remove_user() returned 1"
+);
+
+# test n°11 test if samuel has been added in the base
+isnt(
+    get_user_by_email('samuel@oui.fr'), 
+        {
+            name => 'samuel',
+            id => 3,
+            email => 'samuel@oui.fr'
+        },
+        "samuel n'est pas dans la base"
+);
 
 done_testing();
