@@ -74,8 +74,7 @@ sub add_user($name, $email) {
     return $new_user;
 }
 
-sub remove_user {
-    my $id = shift;
+sub remove_user($id) {
     my $users = get_users();
     my $new_users = [];
     foreach my $user (@$users) {
