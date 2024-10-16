@@ -68,10 +68,10 @@ sub add_user($name, $email) {
         email => $email
     };
     push @$users, $new_user;
-    open my $fh, '>', $users_file or croak "Can't open $users_file: $!";
+    open my $fh, '>', $users_file or return 0;
     print $fh encode_json($users);
     close $fh;
-    return $new_user;
+    return 1;
 }
 
 sub remove_user($id) {
@@ -82,7 +82,7 @@ sub remove_user($id) {
             push @$new_users, $user;
         }
     }
-    open my $fh, '>', $users_file or croak "Can't open $users_file: $!";
+    open my $fh, '>', $users_file or return 0;
     print $fh encode_json($new_users);
     close $fh;
     return 1;

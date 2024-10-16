@@ -95,8 +95,36 @@ is(
     "get_user_by_id() for non existing user"
 );
 
-# test n°6 add_user
+# test n°6-7-8 add_user
 
-# test n°7 remove_user
+# test n°6 test if samuel is not in the base
+isnt(
+    get_user_by_email('samuel@oui.fr'), 
+        {
+            name => 'samuel',
+            id => 3,
+            email => 'samuel@oui.fr'
+        },
+        "samuel n'est pas dans la base"
+);
+
+# test n°7 test if add_user returns 1
+ok(
+    add_user('samuel', 'samuel@oui.fr'),
+    "is add_user() returned 1"
+);
+
+# test n°8 test if samuel has been added in the base
+is(
+    get_user_by_email('samuel@oui.fr'), 
+    {
+        name => 'samuel',
+        id => 3,
+        email => 'samuel@oui.fr'
+    },
+    "samuel est pas dans la base" 
+);
+
+# test n°9 remove_user
 
 done_testing();
