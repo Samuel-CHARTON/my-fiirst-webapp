@@ -3,15 +3,15 @@
 <h1>List of Users</h1>
 <table>
   <tr>
-    <td>
+    <th>
       id
-    </td>
-    <td>
+    </th>
+    <th>
       name
-    </td>
-    <td>
+    </th>
+    <th>
       email
-    </td>
+    </th>
   </tr>
 <% foreach my $tabs (@$tab) { %>
   <tr>
