@@ -21,7 +21,11 @@ post '/add' => sub ($c) {
     my $username = $c->param('username');
     my $email = $c->param('email');
 
-    add_user($username, $email);
+    my $result = add_user($username, $email);
+    if ($result == 0) {
+      $c->stash(error_msg => 'error username or password empty');
+      return $c->render(template => 'add')
+    }
 
     # $c->stash(username => $username, email => $email);
     # $c->render(template => 'add');

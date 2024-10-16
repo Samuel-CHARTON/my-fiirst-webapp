@@ -104,3 +104,8 @@ form #submit:hover {
     box-shadow: inset 10px 0px 100px 1px rgba(0, 255, 64, 0.253);
     transition: all ease-in-out .25s;
 }
+
+#error_msg {
+    color: red;
+    margin-top: 25px;
+}

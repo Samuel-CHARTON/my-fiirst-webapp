@@ -11,6 +11,9 @@
     %= password_field 'email', id => "email", placeholder => 'toto@toto.fr', required => 'true'
     %= submit_button 'add', id => 'submit'
 % end
+<% if (stash('error_msg')) { %>
+  <p id="error_msg">error: <%= stash('error_msg') %></p>
+<% } %>
 <!--
 <% if (stash('username') && stash('email')) { %>
   <p>Username: <%= stash('username') %></p>
