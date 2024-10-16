@@ -114,6 +114,19 @@ ok(
     "is add_user() returned 1"
 );
 
+# tests n°7.5 test if add_user returns 0 when eather name or email empty
+ok(
+    !add_user('', ''), 'add_user(both empty) returned 0'
+);
+
+ok(
+    !add_user('sa', ''), 'add_user(name filled, email empty) returned 0'
+);
+
+ok(
+    !add_user('', 'aa@aa.aa'), 'add_user(email filled, name empty) returned 0'
+);
+
 # test n°8 test if samuel has been added in the base
 is(
     get_user_by_email('samuel@oui.fr'), 

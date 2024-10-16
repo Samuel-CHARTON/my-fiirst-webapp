@@ -57,7 +57,10 @@ sub get_user_by_email($email) {
 }
 
 sub add_user($name, $email) {
-    # arg 1: name, arg 2: email
+    if ($email eq "" || $name eq "") {
+        return 0
+    };
+
     my $users = get_users();
     my $new_id = get_last_id() + 1;
     my $new_user = {
