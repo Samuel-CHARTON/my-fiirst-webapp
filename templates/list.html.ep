@@ -1,0 +1,27 @@
+<h1>List of Users</h1>
+<table>
+  <tr>
+    <td>
+      id
+    </td>
+    <td>
+      name
+    </td>
+    <td>
+      email
+    </td>
+  </tr>
+<% foreach my $tabs (@$tab) { %>
+  <tr>
+    <td>
+      <%== $tabs->{id} %>
+    </td>
+    <td>
+      <%== $tabs->{name} %>
+    </td>
+    <td>
+      <%== $tabs->{email} %>
+    </td>
+  </tr>
+<% } %>
+</table>

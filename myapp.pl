@@ -29,67 +29,6 @@ post '/add' => sub ($c) {
 };
 
 app->start;
-__DATA__
 
 # TODO: A partir de / on ne peut pas naviguer
 # TODO: A partir /list on ne peut pas ajouter un user sans connaitre la route
-
-@@ index.html.ep
-% layout 'default';
-% title 'Welcome';
-<h1>Welcome to the Mojolicious real-time web framework!</h1>
-
-@@ layouts/default.html.ep
-<!DOCTYPE html>
-<html>
-  <head><title><%= title %></title></head>
-  <body><%= content %></body>
-</html>
-
-@@ list.html.ep
-<h1>List of Users</h1>
-<table>
-  <tr>
-    <td>
-      id
-    </td>
-    <td>
-      name
-    </td>
-    <td>
-      email
-    </td>
-  </tr>
-<% foreach my $tabs (@$tab) { %>
-  <tr>
-    <td>
-      <%== $tabs->{id} %>
-    </td>
-    <td>
-      <%== $tabs->{name} %>
-    </td>
-    <td>
-      <%== $tabs->{email} %>
-    </td>
-  </tr>
-<% } %>
-</table>
-
-@@ add.html.ep
-<!--
-#https://dev.to/akuks/forms-and-fields-in-mojolicous-1ng0 + gpt
--->
-<h1>Add an user</h1>
-%= form_for add => (method => 'POST') => begin
-    %= label_for username => 'Username:'
-    %= text_field 'username', id => 'username'
-    %= label_for email => 'email:'
-    %= password_field 'email', id => "email"
-    %= submit_button 'add'
-% end
-<!--
-<% if (stash('username') && stash('email')) { %>
-  <p>Username: <%= stash('username') %></p>
-  <p>email: <%= stash('email') %></p>
-<% } %>
--->
