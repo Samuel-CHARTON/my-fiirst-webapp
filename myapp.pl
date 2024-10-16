@@ -33,6 +33,3 @@ post '/add' => sub ($c) {
 };
 
 app->start;
-
-# TODO: A partir de / on ne peut pas naviguer
-# TODO: A partir /list on ne peut pas ajouter un user sans connaitre la route
