@@ -5,8 +5,6 @@ use warnings;
 use Data::Dumper;
 use database_manager qw(get_users get_user_by_id get_user_by_email add_user remove_user);
 
-# TODO: ./test_database_manager.pl te permet de faire des verifications manuelles et c est un bon debut, ca serait top que tu le convertisse en test unitaire
-
 # test get_users
 my $users = get_users();
 print "Current users:\n";

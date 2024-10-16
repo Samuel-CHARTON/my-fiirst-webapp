@@ -13,8 +13,6 @@ our @EXPORT_OK = qw(get_users get_user_by_id get_user_by_email add_user remove_u
 
 my $users_file = 'fake_db.json';
 
-# TODO: database_manager.pm pourrais aussi beneficier de fonction signature en utlisant par example v5.36
-
 sub set_users_file($file) {
     $users_file = $file;
 }
