@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head><title><%= title %></title></head>
+    <link rel="stylesheet" href="/styles.css">
   <body><%= content %></body>
 </html>
