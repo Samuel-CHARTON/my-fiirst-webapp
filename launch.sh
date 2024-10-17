@@ -1,1 +1,1 @@
-./myapp.pl daemon
+morbo ./myapp.pl

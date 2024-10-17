@@ -1,5 +1,4 @@
 #!/usr/bin/env perl
-
 use strict;
 use warnings;
 
@@ -10,7 +9,7 @@ use Carp;
 
 use v5.36;
 
-use lib './';
+use lib './lib';
 use database_manager qw(get_users get_user_by_id get_user_by_email add_user remove_user set_users_file);
 
 # initiate the content of the test db and set database manager to use this file as db
