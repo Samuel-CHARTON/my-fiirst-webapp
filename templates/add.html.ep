@@ -8,7 +8,7 @@
     %= label_for username => 'Username:'
     %= text_field 'username', id => 'username', placeholder => 'Toto', required => 'true'
     %= label_for email => 'email:'
-    %= password_field 'email', id => "email", placeholder => 'toto@toto.fr', required => 'true'
+    %= text_field 'email', id => "email", placeholder => 'toto@toto.fr', required => 'true', pattern => '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' 
     %= submit_button 'add', id => 'submit'
 % end
 <% if (stash('error_msg')) { %>
