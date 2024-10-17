@@ -107,23 +107,74 @@ isnt(
 );
 
 # test n°7 test if add_user returns 1
+my ($status, $id_or_msg) = add_user('samuel', 'samuel@oui.fr');
 ok(
-    add_user('samuel', 'samuel@oui.fr'),
-    "is add_user() returned 1"
+    $status == 1,
+    "add_user() returned 1"
+);
+is(
+    $id_or_msg,
+    "",
+    "add_user() returned no message"
 );
 
-# tests n°7.5 test if add_user returns 0 when eather name or email empty
+
+# tests n°7.5 test if add_user returns 0 and error message when eather name, email empty and if email bad
+($status, $id_or_msg) = add_user('', '');
 ok(
-    !add_user('', ''), 'add_user(both empty) returned 0'
+    $status == 0,
+    'add_user(both empty) returned 0'
+);
+is(
+    $id_or_msg,
+    'error username or password empty',
+    "Error message returned for both fields empty"
 );
 
+($status, $id_or_msg) = add_user('sa', '');
 ok(
-    !add_user('sa', ''), 'add_user(name filled, email empty) returned 0'
+    $status == 0,
+    'add_user(name filled, email empty) returned 0'
+);
+is(
+    $id_or_msg,
+    'error username or password empty',
+    "Error message returned for email empty"
 );
 
+($status, $id_or_msg) = add_user('', 'aa@aa.aa');
 ok(
-    !add_user('', 'aa@aa.aa'), 'add_user(email filled, name empty) returned 0'
+    $status == 0,
+    'add_user(email filled, name empty) returned 0'
 );
+is(
+    $id_or_msg,
+    'error username or password empty',
+    "Error message returned for name empty"
+);
+
+($status, $id_or_msg) = add_user('samuel', 'samuel@oui.fr');
+ok(
+    $status == 1,
+    "add_user() with valid email succeeded"
+);
+is(
+    $id_or_msg,
+    "",
+    "add_user() with valid email returned no error message"
+);
+
+($status, $id_or_msg) = add_user('samuel', 'invalid-email');
+ok(
+    $status == 0,
+    'add_user() with invalid email failed'
+);
+is(
+    $id_or_msg,
+    'error invalid email',
+    'The error message for invalid email is correct'
+);
+
 
 # test n°8 test if samuel has been added in the base
 is(

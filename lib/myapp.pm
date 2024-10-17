@@ -29,9 +29,9 @@ sub startup ($self) {
         my $username = $c->param('username');
         my $email = $c->param('email');
 
-        my $result = add_user($username, $email);
-        if ($result == 0) {
-            $c->stash(error_msg => 'error username or password empty');
+        my ($status, $id_or_msg) = add_user($username, $email);
+        if ($status == 0) {
+            $c->stash(error_msg => $id_or_msg);
             return $c->render(template => 'add');
         }
 
