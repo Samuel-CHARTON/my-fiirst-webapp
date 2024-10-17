@@ -8,8 +8,7 @@ use Test2::V0;
 use JSON;
 use Carp;
 
-use feature 'signatures';
-no warnings 'experimental::signatures';
+use v5.36;
 
 use lib './';
 use database_manager qw(get_users get_user_by_id get_user_by_email add_user remove_user set_users_file);

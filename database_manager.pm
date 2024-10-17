@@ -6,8 +6,7 @@ use JSON;
 use Exporter 'import';
 use Carp;
 
-use feature 'signatures';
-no warnings 'experimental::signatures';
+use v5.36;
 
 our @EXPORT_OK = qw(get_users get_user_by_id get_user_by_email add_user remove_user set_users_file);
 
