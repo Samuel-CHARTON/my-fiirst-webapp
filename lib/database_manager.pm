@@ -141,7 +141,7 @@ sub remove_user($id) {
     # }
     
     open my $fh, '>', $users_file or return 0;
-    print $fh encode_json($new_users);
+    #print $fh encode_json($new_users);
     close $fh;
     return 1;
 }
