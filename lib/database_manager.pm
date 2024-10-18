@@ -14,6 +14,7 @@ my $users_file = 'fake_db.json';
 
 sub set_users_file($file) {
     $users_file = $file;
+    return;
 }
 
 sub validate_email($email) {
@@ -63,7 +64,7 @@ sub get_users() {
     local $/; # Enable 'slurp' mode to read the whole file at once
     my $json_text = <$fh>;
     close $fh;
-    return decode_json($json_text);
+    return eval { decode_json($json_text) } // [];
 }
 
 sub get_last_id() {
@@ -84,7 +85,7 @@ sub get_user_by_id($id) {
             return $user;
         }
     }
-    return undef;
+    return;
 }
 
 sub get_user_by_email($email) {
@@ -94,13 +95,14 @@ sub get_user_by_email($email) {
             return $user;
         }
     }
-    return undef;
+    return;
 }
 
 sub add_user($name, $email) {
-    if ($email eq "" || $name eq "") {
+
+    if ( ! length $email || ! length $name ) { # length undef -> 0 
         return (0, "error username or password empty");
-    };
+    }
 
     unless (validate_email($email)) {
         return (0, "error invalid email");
@@ -114,20 +116,30 @@ sub add_user($name, $email) {
         email => $email
     };
     push @$users, $new_user;
+    
     open my $fh, '>', $users_file or return 0;
     print $fh encode_json($users);
     close $fh;
+    
     return (1, "");
 }
 
 sub remove_user($id) {
-    my $users = get_users();
-    my $new_users = [];
-    foreach my $user (@$users) {
-        if ($user->{id} != $id) {
-            push @$new_users, $user;
-        }
-    }
+    #my $users = get_users();
+
+    my $users = [ grep { $_->{id} != $id } get_users()->@* ];
+    
+    # my $new_users = [];
+
+    # # @$user ou $users->@*
+    # # @{ $user->{'another-list'} } ou $user->{'another-list'}->@*
+    
+    # foreach my $user (@$users) { # []
+    #     if ($user->{id} != $id) {
+    #         push @$new_users, $user;
+    #     }
+    # }
+    
     open my $fh, '>', $users_file or return 0;
     print $fh encode_json($new_users);
     close $fh;
